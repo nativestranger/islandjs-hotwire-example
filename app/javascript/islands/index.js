@@ -3,8 +3,10 @@
 
 // React component imports
 import HelloWorld from './components/HelloWorld.jsx';
+import Reactions from './components/Reactions.jsx';
 
 // Mount components to the global islandjsRails namespace
 window.islandjsRails = {
-  HelloWorld
+  HelloWorld,
+  Reactions
 };

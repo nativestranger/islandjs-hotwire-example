@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  root "posts#index"
+  resources :posts do
+    resources :reactions, only: [:create, :destroy]
+  end
+  
+  namespace :api do
+    namespace :v1 do
+      resources :posts, only: [] do
+        resources :reactions, only: [:create]
+        delete 'reactions/:emoji', to: 'reactions#destroy'
+      end
+    end
+  end
+  
   # IslandJS demo routes (you can remove these)
   get 'islandjs', to: 'islandjs_demo#index'
   get 'islandjs/react', to: 'islandjs_demo#react'

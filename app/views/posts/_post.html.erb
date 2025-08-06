@@ -1,0 +1,33 @@
+<%= turbo_frame_tag dom_id(post) do %>
+  <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100" data-posts-list-target="post">
+    <div class="p-4 sm:p-6">
+      <div class="prose prose-slate max-w-none">
+        <p class="text-slate-800 text-base sm:text-lg leading-relaxed mb-3"><%= post.body %></p>
+      </div>
+      
+      <div class="flex flex-col gap-3 pt-3 border-t border-slate-100">
+        <div class="text-sm text-slate-500 flex items-center">
+          <svg class="w-4 h-4 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Posted <%= time_ago_in_words(post.created_at) %> ago
+        </div>
+        
+        <div>
+          <%= react_component('Reactions', {
+            postId: post.id,
+            currentSessionId: session.id.to_s,
+            initialReactions: post.reactions.map { |r| { 
+              id: r.id, 
+              emoji: r.emoji, 
+              session_id: r.session_id,
+              post_id: r.post_id
+            } }
+          }, {
+            container_id: "reactions-post-#{post.id}"
+          }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
