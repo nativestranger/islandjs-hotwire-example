@@ -62,4 +62,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "islandjs-rails", "~> 0.1.0"
+gem "islandjs-rails", "~> 0.2.1"
