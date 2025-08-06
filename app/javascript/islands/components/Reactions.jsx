@@ -74,6 +74,7 @@ function Reactions({ containerId }) {
       
       // Check if current user has already reacted with this emoji
       const userReaction = reactions.find(r => r.emoji === emoji && r.session_id === currentSessionId);
+      console.log('Toggle reaction check:', { emoji, currentSessionId, userReaction, reactions });
       
       if (userReaction) {
         // Remove user's reaction
@@ -105,6 +106,7 @@ function Reactions({ containerId }) {
 
         if (response.ok) {
           const data = await response.json();
+          console.log('Reaction added response:', data);
           setReactions(prev => [...prev, data.reaction]);
         } else {
           const errorData = await response.json();

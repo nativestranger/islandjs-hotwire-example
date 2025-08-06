@@ -29,6 +29,27 @@
           <% end %>
 
           <div>
+            <%= form.hidden_field :category, id: "post_category_input" %>
+            <%= react_component('Combobox', {
+              options: [
+                { value: "technology", label: "Technology" },
+                { value: "business", label: "Business" },
+                { value: "lifestyle", label: "Lifestyle" },
+                { value: "health", label: "Health & Wellness" },
+                { value: "education", label: "Education" },
+                { value: "entertainment", label: "Entertainment" },
+                { value: "sports", label: "Sports" },
+                { value: "travel", label: "Travel" },
+                { value: "food", label: "Food & Cooking" },
+                { value: "other", label: "Other" }
+              ],
+              targetInputId: "post_category_input",
+              placeholder: "Select a category...",
+              label: "Category"
+            }) %>
+          </div>
+
+          <div>
             <%= form.label :body, "What's on your mind?", class: "block text-sm font-medium text-slate-700 mb-2" %>
             <%= form.text_area :body, 
                 rows: 6,

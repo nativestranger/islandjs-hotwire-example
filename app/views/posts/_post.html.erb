@@ -1,6 +1,31 @@
 <%= turbo_frame_tag dom_id(post) do %>
   <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100" data-posts-list-target="post">
     <div class="p-4 sm:p-6">
+      <% if post.category.present? %>
+        <div class="mb-3">
+          <% 
+            category_colors = {
+              "technology" => "from-blue-500 to-cyan-500 border-blue-200 text-blue-600 bg-blue-50",
+              "business" => "from-emerald-500 to-teal-500 border-emerald-200 text-emerald-600 bg-emerald-50",
+              "lifestyle" => "from-pink-500 to-rose-500 border-pink-200 text-pink-600 bg-pink-50",
+              "health" => "from-green-500 to-lime-500 border-green-200 text-green-600 bg-green-50",
+              "education" => "from-purple-500 to-indigo-500 border-purple-200 text-purple-600 bg-purple-50",
+              "entertainment" => "from-amber-500 to-orange-500 border-amber-200 text-amber-600 bg-amber-50",
+              "sports" => "from-red-500 to-orange-500 border-red-200 text-red-600 bg-red-50",
+              "travel" => "from-sky-500 to-blue-500 border-sky-200 text-sky-600 bg-sky-50",
+              "food" => "from-yellow-500 to-amber-500 border-yellow-200 text-yellow-600 bg-yellow-50",
+              "other" => "from-gray-500 to-slate-500 border-gray-200 text-gray-600 bg-gray-50"
+            }
+            colors = category_colors[post.category] || category_colors["other"]
+            gradient_colors = colors.split(" ")[0..1].join(" ")
+            border_text_bg = colors.split(" ")[2..-1].join(" ")
+          %>
+          <span class="inline-flex items-center px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold <%= border_text_bg %> border">
+            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gradient-to-r <%= gradient_colors %> mr-1.5 sm:mr-2"></span>
+            <%= post.category.humanize %>
+          </span>
+        </div>
+      <% end %>
       <div class="prose prose-slate max-w-none">
         <p class="text-slate-800 text-base sm:text-lg leading-relaxed mb-3"><%= post.body %></p>
       </div>

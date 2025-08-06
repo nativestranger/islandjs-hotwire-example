@@ -4,9 +4,11 @@
 // React component imports
 import HelloWorld from './components/HelloWorld.jsx';
 import Reactions from './components/Reactions.jsx';
+import Combobox from './components/Combobox.jsx';
 
 // Mount components to the global islandjsRails namespace
 window.islandjsRails = {
   HelloWorld,
-  Reactions
+  Reactions,
+  Combobox
 };
